@@ -26,6 +26,11 @@
     </div>
   
     <div>
+        <%= form.label :release_date %><br>
+        <%= form.date_select :release_date, start_year: 1900, end_year: Time.now.year %>
+    </div>
+
+    <div>
       <%= form.submit "Add" %>
     </div>
   <% end %>

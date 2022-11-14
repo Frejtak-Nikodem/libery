@@ -1,7 +1,7 @@
 <h1>
   Photo: <br>
     <% if @books.image.attached? %>
-      <%= image_tag @books.image, :style => "width: 240px; height: 300px;" %>
+      <%= image_tag @books.image, :style => "width: 240px; height: 300px" %>
     <% end %>
 </h1>
 
@@ -10,6 +10,8 @@
 <p>Gatunek: <%= @books.species %></p>
 
 <p>Autor: <%= @books.author %></p>
+
+<p>Release Date: <%= @books.release_date %></p>
 
 <ul>
     <li><%= link_to 'Edit', edit_book_path(@books) %></li>
