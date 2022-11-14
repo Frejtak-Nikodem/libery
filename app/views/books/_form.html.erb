@@ -1,0 +1,31 @@
+<%= form_with model: books do |form| %>
+    <div>
+      <%= form.label :image %><br>
+      <%= form.file_field :image %>
+    </div>
+  
+    <div>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+      <% books.errors.full_messages_for(:title).each do |message| %>
+          <div><%= message %></div>
+      <% end %>
+    </div>
+  
+    <div>
+      <%= form.label :species %><br>
+      <%= form.select :species, ['Horror', 'Fantastyka', 'Poradniki', 'Basnie', 'Bajki'], selected: 'Poradniki' %>
+      <% books.errors.full_messages_for(:species).each do |message| %>
+          <div><%= message %></div>
+      <% end %>
+    </div>
+  
+    <div>
+      <%= form.label :author %><br>
+      <%= form.text_field :author %>
+    </div>
+  
+    <div>
+      <%= form.submit "Add" %>
+    </div>
+  <% end %>

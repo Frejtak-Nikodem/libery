@@ -1,0 +1,22 @@
+<h1>Authors</h1>
+
+<%= render 'authors/form1' %><br>
+
+<table>
+  <% @authors.each do |author| %>
+    <tr>
+      <td> <a href="<%= author_path(author) %>">
+      <%= author.last_name %></a></td>
+      <td>  |  </td>
+      <td> <%= author.country_of_birth %></a></td>
+      <td><%= link_to 'Edit', edit_author_path(author) %></td>
+      <td><%= link_to 'Destroy', author_path(author),
+        method: :delete,
+        data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<br>
+
+<%= link_to "Add Author", new_author_path %><br>
+<%= link_to "Back", menu_index_path %>

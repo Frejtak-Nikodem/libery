@@ -1,0 +1,13 @@
+<h1><%= @authors.last_name %></h1>
+
+<p>Biography: <%= @authors.biography %></p>
+
+<p>Country of birth: <%=  @authors.country_of_birth %></p>
+
+<ul>
+    <li><%= link_to 'Edit', edit_author_path(@authors) %></li>
+    <li><%= link_to 'Destroy', author_path(@authors),
+      method: :delete,
+      data: { confirm: 'Are you sure?' } %></li>
+</ul><br>
+<%= link_to "Powrot", authors_path %>
