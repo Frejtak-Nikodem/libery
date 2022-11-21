@@ -2,24 +2,8 @@
 
 <%= render 'authors/form1' %><br>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Number</th>
-        <th>Last Name</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @wynik.each do |wynik| %>
-        <tr>
-          <td><%= wynik.id %></td>
-          <td><%= wynik.last_name %></td>
-          <td><%= link_to 'Check', wynik %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
+  <div id="q"> 
+  
+  </div>
 
 <%= link_to "Back", authors_path %>

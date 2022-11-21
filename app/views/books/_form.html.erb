@@ -21,8 +21,8 @@
     </div>
   
     <div>
-      <%= form.label :author %><br>
-      <%= form.text_field :author %>
+      <%= form.label :author_id, "Choose Author:" %><br>
+      <%= form.collection_select :author_id, Author.all, :id, :last_name %>
     </div>
   
     <div>

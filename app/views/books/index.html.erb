@@ -1,9 +1,11 @@
 <h1>Books</h1>
 
+<%= button_to "Search", books_search_path %><br>
+
 <table style="border-collapse: collapse; ">
     <% @books.each do |book| %>
         <tr style="border-style: solid; border-width: 1px;">
-        <td style=>
+        <td>
             <% if book.image.attached? %>
                 <%= image_tag book.image, :style => "width: 80px; height: 100px" %>
             <% end %>
@@ -12,15 +14,19 @@
         <td> | </td>
         <td><%= book.species %></td>
         <td> | </td>
-        <td><%= book.author %></td>
+        <td><%= book.author.last_name %></td>
         <td> | </td>
+        <% if current_user && current_user.admin %>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
         <td><%= link_to 'Destroy', book_path(book),
             method: :delete,
             data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
         </tr>
     <% end %>
 </table>
-<br> 
+<br>
+<% if current_user && current_user.admin %> 
 <%= link_to "New Ksiazka", new_book_path %><br>
+<% end %>
 <%= link_to "Powrot", menu_index_path %>

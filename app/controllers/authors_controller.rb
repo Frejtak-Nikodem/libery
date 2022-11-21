@@ -1,14 +1,12 @@
 class AuthorsController < ApplicationController
+    before_action :authenticate_user!
+  
     def index  
-
       @authors = Author.all   
-      @q = Author.ransack(params[:q])
-      @wynik = @q.result
     end
   
     def search
-      @q = Author.ransack(params[:q])
-      @wynik = @q.result
+        @q = Author.where(" last_name LIKE ?", "%#{ params[:q] }%")
     end
       
     

@@ -1,10 +1,23 @@
 <h1> Libery </h1>
 
-<ul>
-<li>
-<a href="<%= authors_path %>"> Authors </a>
-</li>
-<li>
-<a href="<%= books_path %>"> Books </a>
-</li>
-</ul>
+<% if current_user %>
+<%= link_to 'Sign out', destroy_user_session_path,
+    method: :delete %>
+
+    <ul>
+        <li>
+            <a href="<%= authors_path %>"> Authors </a>
+        </li>
+        <li>
+            <a href="<%= books_path %>"> Books </a>
+        </li>
+    </ul>
+    <% if current_user && current_user.admin %>
+    <%= link_to 'All Users', menu_accounts_path %>
+    <% end %>
+<% else %>
+
+<%= link_to 'Sign up', new_user_registration_path %> <br>
+
+<%= link_to 'Sign in', new_user_session_path %><br>
+<% end %>

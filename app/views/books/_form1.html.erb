@@ -1,0 +1,14 @@
+<%= form_with( url: books_search_path, method: :get) do |f| %>
+    <%= f.text_field :title, placeholder: "Search"  %>
+<% end %>
+
+<script>
+    $('#title').keyup(function(){
+        $.ajax({
+            url: "/books/search",
+            type: "GET",
+            dataType: "script",
+            data: { q:  $("#title").val() }
+        })
+    })
+</script>

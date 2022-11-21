@@ -1,7 +1,12 @@
 class BooksController < ApplicationController
-    def index  
+    before_action :authenticate_user!
   
+    def index  
       @books = Book.all   
+    end
+
+    def search
+      @q = Book.where(" title LIKE ?", "%#{ params[:q] }%")
     end
   
     def show
@@ -45,6 +50,6 @@ class BooksController < ApplicationController
   
     private
       def books_params
-        params.require(:book).permit(:title, :species, :author, :release_date, :image)
+        params.require(:book).permit(:title, :species, :author_id, :release_date, :image)
       end
   end

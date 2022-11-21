@@ -1,0 +1,24 @@
+<table style="border-collapse: collapse; ">
+    <thead>
+      <tr style="border-style: solid; border-width: 1px;">
+        <th> Number </th>
+        <th> </th>
+        <th> Title </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @q.each do |q| %>
+        <tr style="border-style: solid; border-width: 1px;">
+          <td><%= q.id %></td>
+          <td>
+            <% if q.image.attached? %>
+              <%= image_tag q.image, :style => "width: 80px; height: 100px" %>
+            <% end %>
+          </td>
+          <td><%= q.title %></td>
+          <td><%= link_to '| Check', q %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

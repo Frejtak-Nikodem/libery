@@ -1,23 +1,43 @@
-<h1>
-  Photo: <br>
-    <% if @books.image.attached? %>
+<table>
+  <tr>
+    <td>
+      <% if @books.image.attached? %>
       <%= image_tag @books.image, :style => "width: 240px; height: 300px" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>Tytuł: <%= @books.title %></p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>Gatunek: <%= @books.species %></p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>Autor: <%= @books.author.last_name %></p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>Release Date: <%= @books.release_date %></p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <% if current_user && current_user.admin %>
+      <ul>
+        <li><%= link_to 'Edit', edit_book_path(@books) %></li>
+        <li><%= link_to 'Destroy', books_path(@books),
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %></li>
+      </ul>
     <% end %>
-</h1>
-
-<p>Tytuł: <%= @books.title %></p>
-
-<p>Gatunek: <%= @books.species %></p>
-
-<p>Autor: <%= @books.author %></p>
-
-<p>Release Date: <%= @books.release_date %></p>
-
-<ul>
-    <li><%= link_to 'Edit', edit_book_path(@books) %></li>
-    <li><%= link_to 'Destroy', books_path(@books),
-      method: :delete,
-      data: { confirm: 'Are you sure?' } %></li>
-</ul>
+    </td>
+  </tr>
+</table>
 
 <%= link_to "Powrot", books_path %>
