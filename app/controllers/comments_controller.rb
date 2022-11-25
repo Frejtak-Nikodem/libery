@@ -1,11 +1,15 @@
 class CommentsController < ApplicationController
 
     def create
-        @books = Book.find(params[:book_id])
-        @books.comments.create(comment_params)
-        @books.comments.order(created_at DESC)
-        redirect_to book_path(@books)
-    end
+        @book = Book.find(params[:book_id])
+        @comment = @book.comments.create(comment_params)
+        @comment.user_id = current_user.id
+        if @comment.save
+          redirect_to @book
+        else
+          flash.now[:danger] = "error"
+        end
+      end
 
     def destroy
         @comments = Comment.find(params[:id])
@@ -16,7 +20,7 @@ class CommentsController < ApplicationController
     private
 
     def comment_params
-        params.require(:comment).permit( :content, :rate, :book_id, :name)
+        params.require(:comment).permit( :content, :rate, :book_id)
     end
 
 end

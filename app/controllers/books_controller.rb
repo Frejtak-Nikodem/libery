@@ -2,7 +2,8 @@ class BooksController < ApplicationController
     before_action :authenticate_user!
   
     def index  
-      @books = Book.all   
+      @books = Book.all
+      @comments = Comment.all
     end
 
     def search
@@ -11,6 +12,7 @@ class BooksController < ApplicationController
   
     def show
       @books = Book.find(params[:id])
+      @commnents = Comment.all
     end
   
     def new

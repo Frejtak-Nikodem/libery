@@ -53,28 +53,10 @@
   </tr>
 </table>
 
-<h2>Comments</h2>
-<% @books.comments.each do |comment| %>
-  <p>
-    <strong>Username:</strong>
-    <%= comment.name %>
-  </p>
- 
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.content %>
-  </p>
+#######################
 
-  <p>
-    <strong>Rate:</strong>
-    <%= comment.rate %>☆/10☆
-  </p>
-  <% if current_user && current_user.admin %>
-    <%= link_to 'Destroy', comment_path(book_id: @books, id:comment.id ),
-          method: :delete,
-          data: { confirm: 'Are you sure?' } %>
-  <% end %>
-<% end %>
+<h2>Comments</h2>
+<%= render "comment", books: @books %><br>
 
   <h2>Add a comment:</h2>
   <%= render "form2", books: @books %><br>

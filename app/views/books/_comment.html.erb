@@ -1,0 +1,22 @@
+<% @books.comments.each do |comment| %>
+    <p>
+      <strong>Username:</strong>
+      <%= comment.user.username %>
+    </p>
+   
+    <p>
+      <strong>Comment:</strong>
+      <%= comment.content %>
+    </p>
+  
+    <p>
+      <strong>Rate:</strong>
+      <%= comment.rate %>☆/10☆
+    </p>
+    <% if current_user && current_user.admin %>
+      <%= link_to 'Destroy', comment_path(book_id: @books, id:comment.id ),
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %><br>
+    <% end %>
+    --------
+  <% end %>
