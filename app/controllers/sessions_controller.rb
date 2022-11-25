@@ -12,5 +12,13 @@ class SessionsController < Devise::SessionsController
       flash.discard(:recaptcha_error) # We need to discard flash to avoid showing it on the next page reload
       render :new
     end
-  end 
+  end
+  
+  def after_sign_in_path_for(resource)
+      if current_user && current_user.admin
+        menu_admin_dashboard_path
+      else
+        menu_user_dashboard_path
+      end
+  end
 end

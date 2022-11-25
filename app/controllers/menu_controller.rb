@@ -20,4 +20,20 @@ class MenuController < ApplicationController
 		@users = User.all
 	end
 
+	def users_book
+		@users = User.all
+		@books = Book.all
+	end
+
+	def user_dashboard
+		@users = User.all
+		@books = Book.all
+	end
+
+	def admin_dashboard
+		@users = User.all
+		@books = Book.all
+	end
+
+	
 end

@@ -1,4 +1,18 @@
-<%= form_with model: books do |form| %>
+<%= form_with model: books, local: true do |form| %>
+
+    <% if books.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(books.errors.count, "bład") %> 
+        </h2>
+        <ul>
+          <% books.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <div>
       <%= form.label :image %><br>
       <%= form.file_field :image %>

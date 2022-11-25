@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-
-  has_many :books
+  has_many :books, :dependent => :destroy
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, and :omniauthable

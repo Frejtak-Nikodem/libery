@@ -1,0 +1,54 @@
+<% if current_user && current_user %>
+
+<h1> Hello: <%= current_user.username %> </h1>
+
+<table style="border-collapse: collapse; ">
+    <tr style="border-style: solid; border-width: 1px;">
+        <td> Username: <%= current_user.username %> </td>
+        <tr style="border-style: solid; border-width: 1px;">
+        <td> Email: <%= current_user.email %> </td>
+        </tr>
+        <tr style="border-style: solid; border-width: 1px;">
+        <td> Account has been created at: <%= current_user.created_at.strftime('%B %d %Y at %H:%M:%S') %> </td>
+        </tr>
+        <tr style="border-style: solid; border-width: 1px;">
+        <td> Last login has been at: <%= current_user.last_sign_in_at.strftime('%B %d %Y at %H:%M:%S') %> </td>
+        </tr>
+        <tr style="border-style: solid; border-width: 1px;">
+        <td> Status: 
+        <% if current_user.admin == false %>
+            User
+        <% else %> 
+            Admin
+        <% end %> </td>
+        </tr>
+    </tr>
+</table>
+<br>
+<table style="border-collapse: collapse; ">
+
+    <% current_user.books.each do |book| %>
+        <% if book.status == true %>
+        <tr style="border-style: solid; border-width: 1px;">
+            <td>
+                <% if book.image.attached? %>
+                    <%= image_tag book.image, :style => "width: 80px; height: 100px" %>
+                <% end %>
+            </td>
+            <td><%= book.title %></td>
+            <td> | </td>
+            <td><%= book.species %></td>
+            <td> | </td>
+            <td><p> Rented by: <%= current_user.email %> </p></td>
+            <td> | </td>
+            <td><a href="/books/<%= book.id %>/unrental"> Give Back </a></td>
+        </tr>
+        <% end %>
+    <% end %>
+
+</table>
+
+<br>
+<%= link_to 'Back to Menu', root_path %>
+
+<% end %>

@@ -47,9 +47,27 @@ class BooksController < ApplicationController
   
       redirect_to books_path, status: :see_other
     end
+
+    def rental
+      @rent = Book.find(params[:id])
+      @rent.user_id = current_user.id
+      @rent.status = true
+      if @rent.save
+        redirect_to book_path(@rent)
+      end
+    end
+
+    def unrental
+      @unrent = Book.find(params[:id])
+      @unrent.user_id = current_user.id
+      @unrent.status = false
+      if @unrent.save
+        redirect_to book_path(@unrent)
+      end
+    end
   
     private
       def books_params
-        params.require(:book).permit(:title, :species, :author_id, :release_date, :image)
+        params.require(:book).permit(:title, :species, :author_id, :release_date, :image, :user_id, :status)
       end
   end

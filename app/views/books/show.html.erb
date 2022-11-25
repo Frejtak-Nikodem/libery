@@ -8,17 +8,17 @@
   </tr>
   <tr>
     <td>
-      <p>Tytuł: <%= @books.title %></p>
+      <p>Title: <%= @books.title %></p>
     </td>
   </tr>
   <tr>
     <td>
-      <p>Gatunek: <%= @books.species %></p>
+      <p>Species: <%= @books.species %></p>
     </td>
   </tr>
   <tr>
     <td>
-      <p>Autor: <%= @books.author.last_name %></p>
+      <p>Author: <%= @books.author.last_name %></p>
     </td>
   </tr>
   <tr>
@@ -28,10 +28,23 @@
   </tr>
   <tr>
     <td>
+      <% if @books.status == false %>
+        <%= link_to "Rent Book", rental_path %>
+        <p> Not Rented </p>
+      <% else %> 
+        <% if current_user.email == @books.user.email %>
+          <%= link_to "Give Back", unrental_path %>
+        <% end %>
+        <p> Rented by: <%= @books.user.email %> </p>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
     <% if current_user && current_user.admin %>
       <ul>
         <li><%= link_to 'Edit', edit_book_path(@books) %></li>
-        <li><%= link_to 'Destroy', books_path(@books),
+        <li><%= link_to 'Destroy', book_path(@books),
           method: :delete,
           data: { confirm: 'Are you sure?' } %></li>
       </ul>
@@ -40,4 +53,33 @@
   </tr>
 </table>
 
-<%= link_to "Powrot", books_path %>
+<h2>Comments</h2>
+<% @books.comments.each do |comment| %>
+  <p>
+    <strong>Username:</strong>
+    <%= comment.name %>
+  </p>
+ 
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.content %>
+  </p>
+
+  <p>
+    <strong>Rate:</strong>
+    <%= comment.rate %>☆/10☆
+  </p>
+  <% if current_user && current_user.admin %>
+    <%= link_to 'Destroy', comment_path(book_id: @books, id:comment.id ),
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>
+
+  <h2>Add a comment:</h2>
+  <%= render "form2", books: @books %><br>
+
+  <%= link_to "Back", books_path %><br>
+<% if current_user && current_user.admin %>
+  <%= link_to "All Rented Books", menu_users_book_path %>
+<% end %>
